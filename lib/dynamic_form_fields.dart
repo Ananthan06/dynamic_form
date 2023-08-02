@@ -35,13 +35,12 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
         "key": "email",
         "type": "Input",
         "label": "Email",
-        "validation": "required"
+        "validation": "required",
       },
       {
         "label": "Phone",
         "key": "phone",
         "type": "Input",
-        "validation": "digitsOnly"
       },
       {"label": "Age", "key": "age", "type": "Input", "validation": "required"},
       {"label": "Age", "key": "age", "type": "Date", "validation": "required"},
@@ -147,7 +146,8 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
           child:  Column(children: <Widget>[
-             JsonSchema(
+             DynamicFormFromJson(
+               autovalidateMode: AutovalidateMode.onUserInteraction,
               form: form,
               onChanged: (dynamic response) {
                 // this.response = response;
