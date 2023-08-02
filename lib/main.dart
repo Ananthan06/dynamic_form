@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   Future _incrementCounter() async{
-    bool result = await Navigator.pushReplacement(context,
+    bool result = await Navigator.push(context,
         MaterialPageRoute(builder: (context) {
           return DynamicFormPage(jsonData: {
             "fields": [

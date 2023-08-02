@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-class JsonSchema extends StatefulWidget {
-  const JsonSchema({
+class DynamicFormFromJson extends StatefulWidget {
+  const DynamicFormFromJson({
     required this.form,
     required this.onChanged,
     this.padding,
@@ -15,6 +15,7 @@ class JsonSchema extends StatefulWidget {
     this.decorations = const {},
     this.buttonSave,
     this.actionSave,
+    required this.autovalidateMode,
   });
 
   final Map errorMessages;
@@ -26,12 +27,14 @@ class JsonSchema extends StatefulWidget {
   final Widget? buttonSave;
   final Function? actionSave;
   final ValueChanged<dynamic> onChanged;
+  final AutovalidateMode autovalidateMode;
 
   @override
-  _CoreFormState createState() => _CoreFormState(formMap ?? json.decode(form));
+  _DynamicFormFromJsonState createState() =>
+       _DynamicFormFromJsonState(formMap ?? json.decode(form));
 }
 
-class _CoreFormState extends State<JsonSchema> {
+class _DynamicFormFromJsonState extends State<DynamicFormFromJson> {
   final dynamic formGeneral;
 
   int? radioValue;
@@ -110,14 +113,12 @@ class _CoreFormState extends State<JsonSchema> {
           item['type'] == "Input") {
         Widget label = const SizedBox.shrink();
         if (labelHidden(item)) {
-          label = Container(
-            child: Text(
-              item['label'],
-              style: const TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'UbuntuRegular',
-                  color: Colors.grey),
-            ),
+          label =  Text(
+            item['label'],
+            style: const TextStyle(
+                fontSize: 14,
+                fontFamily: 'UbuntuRegular',
+                color: Colors.grey),
           );
         }
 
@@ -218,14 +219,7 @@ class _CoreFormState extends State<JsonSchema> {
 
                   return null;
                 },
-                // inputFormatters: item['validator'] != null && item['validator'] != ''
-                //     ? [
-                //   if (item['validator'] == 'digitsOnly')
-                //     FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                //   if (item['validator'] == 'textOnly')
-                //     FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
-                // ]
-                //     : null,
+
               ),
             ),
           ),
@@ -530,7 +524,10 @@ class _CoreFormState extends State<JsonSchema> {
     return listWidget;
   }
 
-  _CoreFormState(this.formGeneral);
+
+
+
+  _DynamicFormFromJsonState(this.formGeneral);
 
   void _handleChanged() {
     widget.onChanged(formGeneral);
@@ -542,7 +539,7 @@ class _CoreFormState extends State<JsonSchema> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Form(
-      // autovalidateMode: formGeneral['autoValidated'] ?? false,
+      autovalidateMode: widget.autovalidateMode,
       key: _formKey,
       child: Container(
         padding: EdgeInsets.all(widget.padding ?? 8.0),
