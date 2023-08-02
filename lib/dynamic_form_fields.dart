@@ -44,6 +44,7 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
         "validation": "required"
       },
       {"label": "Age", "key": "age", "type": "Input", "validation": "required"},
+      {"label": "Age", "key": "age", "type": "Date", "validation": "required"},
 
       {
         "type": "Select",
@@ -107,6 +108,9 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
               actionSave: (data) {
                 print(data);
                 print(data['fields']);
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Sending Message"),
+                ));
                 // upload(data);
                 // datas = data;
               },

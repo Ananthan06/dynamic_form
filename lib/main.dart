@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 "label": "Phone",
                 "key": "phone",
                 "type": "Input",
-                "validation": "required"
+                "validation": "required",
               },
               {"label": "Age", "key": "age", "type": "Input", "validation": "required"},
 

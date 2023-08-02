@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
@@ -283,6 +284,84 @@ class _CoreFormState extends State<JsonSchema> {
         );
       }
 
+
+      selectStartDate() {
+        showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2020),
+            lastDate: DateTime(2101))
+            .then((DateTime? picked) {
+          if (picked != null ) {
+            // formatted_Start_Date = DateFormat('yyyy-MM-dd').format(picked);
+            // debugPrint("Date is $formatted_Start_Date");
+            // selected_Start_Date = picked;
+            setState(() {
+              // startDate = formatted_Start_Date;
+              formGeneral['fields'][count]['value'] = DateFormat('yyyy-MM-dd').format(picked).toString();
+              _handleChanged();
+//          LeadListStage.lead_start_date_ =formatted_Start_Date;
+            });
+          } else  {
+          } /*else {
+              formatted_Start_Date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+              debugPrint("Date is $formatted_Start_Date");
+              selected_Start_Date = picked;
+              setState(() {
+                startDate = formatted_Start_Date;
+              });
+            }*/
+        });
+      }
+      if (item['type'] == "Date") {
+
+        if (item['value'] == null) {
+          formGeneral['fields'][count]['value'] =  DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+        }
+        listWidget.add(
+          Container(
+            height: 40,
+            width: 200,
+            margin:  const EdgeInsets.all(15.0),
+            child:  Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+              Expanded(child:  Text(item['label'],
+              style: TextStyle(color: Colors.grey),)),
+              InkWell(
+                onTap: () {
+                  selectStartDate();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox.fromSize(
+                      size: const Size(15,
+                          15),
+                      child: const Icon(Icons.date_range),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left:15,
+                        top: 10
+                      ),
+                      child: Text(
+                          formGeneral['fields'][count]['value'],
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize:12,
+                            fontFamily: 'UbuntuMedium',
+                          )),
+                    )
+                  ],
+                ),
+              ),
+            ]),
+          ),
+        );
+      }
+
       if (item['type'] == "Checkbox") {
         List<Widget> checkboxes = [];
         if (labelHidden(item)) {
@@ -313,6 +392,9 @@ class _CoreFormState extends State<JsonSchema> {
             ),
           );
         }
+
+
+
 
         listWidget.add(
            Container(
@@ -381,6 +463,9 @@ class _CoreFormState extends State<JsonSchema> {
     return listWidget;
   }
 
+
+
+
   _CoreFormState(this.formGeneral);
 
   void _handleChanged() {
@@ -405,3 +490,4 @@ class _CoreFormState extends State<JsonSchema> {
     );
   }
 }
+
