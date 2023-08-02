@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class JsonSchema extends StatefulWidget {
@@ -213,6 +214,14 @@ class _CoreFormState extends State<JsonSchema> {
 
                   return null;
                 },
+                // inputFormatters: item['validator'] != null && item['validator'] != ''
+                //     ? [
+                //   if (item['validator'] == 'digitsOnly')
+                //     FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                //   if (item['validator'] == 'textOnly')
+                //     FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
+                // ]
+                //     : null,
               ),
             ),
           ),

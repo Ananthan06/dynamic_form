@@ -41,7 +41,7 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
         "label": "Phone",
         "key": "phone",
         "type": "Input",
-        "validation": "required"
+        "validation": "digitsOnly"
       },
       {"label": "Age", "key": "age", "type": "Input", "validation": "required"},
       {"label": "Age", "key": "age", "type": "Date", "validation": "required"},
@@ -64,7 +64,55 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
             'value': "product 3",
           }
         ]
-      }
+      },
+
+
+      {
+        'key': 'radiobutton1',
+        'type': 'RadioButton',
+        'label': 'Radio Button tests',
+        'value': 2,
+        'items': [
+          {
+            'label': "product 1",
+            'value': 1,
+          },
+          {
+            'label': "product 2",
+            'value': 2,
+          },
+          {
+            'label': "product 3",
+            'value': 3,
+          }
+        ]
+      },
+      {
+        'key': 'switch1',
+        'type': 'Switch',
+        'label': 'Switch test',
+        'value': false,
+      },
+      {
+        'key': 'checkbox1',
+        'type': 'Checkbox',
+        'label': 'Checkbox test',
+        'items': [
+          {
+            'label': "product 1",
+            'value': true,
+          },
+          {
+            'label': "product 2",
+            'value': false,
+          },
+          {
+            'label': "product 3",
+            'value': false,
+          }
+        ]
+      },
+
     ],
     "table_name": "data_collection",
     "response_code": 200,
